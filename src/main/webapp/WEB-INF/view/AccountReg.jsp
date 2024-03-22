@@ -4,12 +4,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>GAME_TOP画面</title>
+<title>ユーザー登録</title>
 </head>
 <body>
-	<h1>トップ画面</h1>
- <li><a href="LoginServlet">ログイン</a></li>
- <li><a href="AccountReg">ユーザー登録<li/>
+<h1>ユーザー登録</h1>
 
+
+<p id="accounts"></p>
+<script src="./js/accountreg.js"></script>
 </body>
 </html>

@@ -22,7 +22,7 @@ public class AccountsDAO {
 	//接続処理
 	private void connect() throws NamingException,SQLException{
 		Context context = new InitialContext();
-		DataSource ds = (DataSource)context.lookup("java:comp/emp/env/mariadb");
+		DataSource ds = (DataSource)context.lookup("java:comp/env/mariadb");
 		this.con = ds.getConnection();
 	}
 	// 切断処理
