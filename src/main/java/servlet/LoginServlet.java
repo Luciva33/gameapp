@@ -24,21 +24,26 @@ public class LoginServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		String userId = request.getParameter("userId");
-		String pass = request.getParameter("pass");
 		
-		Login login = new Login(userId,pass);
+		String pass = request.getParameter("pass");
+		String name = request.getParameter("name");
+		
+		Login login = new Login(name,pass);
 		LoginLogic bo = new LoginLogic();
 		boolean result = bo.execute(login);
 		
 		if(result) {
 			HttpSession session = request.getSession();
-			session.setAttribute("userId", userId);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/loginOK.jsp");
+			session.setAttribute("name", name);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/view/LoginOK.jsp");
 			dispatcher.forward(request, response);
 			
 		}else {
-			response.sendRedirect("LoginServlet");
+			//エラーメッセージ
+			request.setAttribute("errorMsg", "入力ミス！" );
+			RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/view/login.jsp");
+			dispatcher.forward(request, response);
+			//response.sendRedirect("LoginServlet");
 			
 		}
 		

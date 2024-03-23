@@ -9,7 +9,7 @@
 <body>
 	<h1>トップ画面</h1>
  <li><a href="LoginServlet">ログイン</a></li>
- <li><a href="AccountReg">ユーザー登録<li/>
+ <li><a href="AccountRegServlet">ユーザー登録<li/>
 
 </body>
 </html>

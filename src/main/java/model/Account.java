@@ -15,6 +15,14 @@ public class Account implements Serializable {
 		this.mail = mail;
 		this.name = name;
 	}
+	
+
+	public Account(String pass, String name) {
+		super();
+		this.pass = pass;
+		this.name = name;
+	}
+
 
 	public String getUserId() {
 		return userId;

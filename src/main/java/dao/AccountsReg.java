@@ -58,7 +58,7 @@ public class AccountsReg {
 			connect();
 			
 			// SQL文の準備,実行
-			this.stmt = this.con.prepareStatement("SELECT * FROM users");
+			this.stmt = this.con.prepareStatement("SELECT * FROM accounts");
 			this.rs = this.stmt.executeQuery();
 
 			while(rs.next()) {
@@ -69,7 +69,7 @@ public class AccountsReg {
 				String mail =rs.getString("MAIL");
 				
 				// データからインスタンス生成、Listに追加
-				Account account = new Account(userId,pass,mail,name);
+				Account account = new Account(userId,pass,name,mail);
 				list.add(account);
 			}
 		} catch (NamingException | SQLException e) {
@@ -86,9 +86,12 @@ public class AccountsReg {
 			connect();
 			
 			// SQL文準備、実行
-			this.stmt = this.con.prepareStatement("INSERT INTO accounts(PASS,NAME) VALUES(?,?)");
-			this.stmt.setString(1, account.getPass());
-			this.stmt.setString(2, account.getName());
+			this.stmt = this.con.prepareStatement("INSERT INTO accounts(USER_ID,PASS,,NAME,MAIL) VALUES(?,?)");
+			this.stmt.setString(1, account.getUserId());
+			this.stmt.setString(2, account.getPass());
+			this.stmt.setString(3, account.getMail());
+			this.stmt.setString(4, account.getName());
+			
 			int result = this.stmt.executeUpdate();
 			
 			if(result != 1) {
