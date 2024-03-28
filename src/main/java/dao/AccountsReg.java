@@ -86,11 +86,11 @@ public class AccountsReg {
 			connect();
 			
 			// SQL文準備、実行
-			this.stmt = this.con.prepareStatement("INSERT INTO accounts(USER_ID,PASS,,NAME,MAIL) VALUES(?,?)");
+			this.stmt = this.con.prepareStatement("INSERT INTO accounts(USER_ID,PASS,NAME,MAIL) VALUES(?,?,?,?)");
 			this.stmt.setString(1, account.getUserId());
 			this.stmt.setString(2, account.getPass());
-			this.stmt.setString(3, account.getMail());
-			this.stmt.setString(4, account.getName());
+			this.stmt.setString(3, account.getName());
+			this.stmt.setString(4, account.getMail());
 			
 			int result = this.stmt.executeUpdate();
 			
@@ -103,4 +103,40 @@ public class AccountsReg {
 			disconnect();
 		}
 	}
+	
+	//アカウントチェック
+	
+	public Account findByReg(List<Account> list) {
+		Account account =null;
+		try {
+			this.connect();
+			this.stmt = con.prepareStatement
+					("SELECT * FROM ACCOUNTS WHERE NAME =? AND PASS =?");
+			this.stmt.setString(1, account.getName());
+			this.stmt.setString(2,account.getPass());
+			this.rs = this.stmt.executeQuery();    //SELECT文の実行、結果表を取得
+			
+			if(rs.next()) {
+				String userId =rs.getString("USER_ID");
+				String pass = rs.getString("PASS");
+				String mail = rs.getString("MAIL");
+				String name = rs.getString("NAME");
+				account = new Account(userId,pass,mail,name);
+				
+			}
+		
+		
+		}catch(NamingException | SQLException e) {
+			e.printStackTrace();
+			
+		}finally {
+			this.disconnect();
+		}
+		
+		
+		return account;
+		
+	}
 }
+	
+

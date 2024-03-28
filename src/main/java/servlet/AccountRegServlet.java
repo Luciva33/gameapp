@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.AccountsReg;
 import model.Account;
@@ -16,50 +17,51 @@ import model.Account;
 @WebServlet("/AccountRegServlet")
 public class AccountRegServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher dispatcher = request.getRequestDispatcher
-				("WEB-INF/view/AccountReg.jsp");
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		
+		
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/view/AccountReg.jsp");
 		dispatcher.forward(request, response);
+		
+		
+		
+		
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		String name = request.getParameter("name");
 		String pass = request.getParameter("pass");
-		
-		System.out.println(name+ "/"+pass );
-		if(name != null && name.length() != 0 &&
+
+		System.out.println(name + "/" + pass);
+		if (name != null && name.length() != 0 &&
 				pass != null && pass.length() != 0) {
-			
-			Account account  = new Account(pass,name);
-			
-			
-					AccountsReg reg = new AccountsReg();
-					List<Account>list = reg.findAll();
-					reg.InsertOne(account);
-			
-					RequestDispatcher dispatcher = request.getRequestDispatcher
-							("WEB-INF/view/AccountReg.jsp");
-					dispatcher.forward(request, response);
-			
-			
-			
-			
-		}else {
-			//エラーメッセージ
-			request.setAttribute("errorMsg", "入力ミス！" );
-			RequestDispatcher dispatcher = request.getRequestDispatcher
-					("WEB-INF/view/AccountReg.jsp");
+
+			Account account = new Account(pass, name);
+
+			AccountsReg reg = new AccountsReg();
+			List<Account> list = reg.findAll();
+			//reg. findByReg(list);
+			reg.InsertOne(account);
+			request.setAttribute("Msg", name +"を登録しました!");
+			HttpSession session = request.getSession();
+			session.setAttribute("account", account);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/view/AccountReg.jsp");
 			dispatcher.forward(request, response);
-			
+
+		} else {
+			//エラーメッセージ
+			request.setAttribute("errorMsg", "登録できませんでした！");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/view/AccountReg.jsp");
+			dispatcher.forward(request, response);
+
 		}
-	
-				
-				
-				
-			
-	
+
 	}
 
 }

@@ -8,8 +8,8 @@
 <title>ログイン成功</title>
 </head>
 <body>
-	<p>ようこそ<c:out value="${name}" />さん</p>
-	<a href="">GAME_MAINへ</a>
-	<a href="WelcomeServlet">戻る</a>
+	<p>ようこそ<c:out value="${Login.name}" />さん</p>
+	<a href="GameMainServlet">GAME_MAINへ</a>
+	<a href="Logout">ログアウト</a>
 </body>
 </html>
