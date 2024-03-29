@@ -56,8 +56,8 @@ public class AccountsDAO {
 		try {
 			this.connect();
 			this.stmt = con.prepareStatement
-					("SELECT * FROM ACCOUNTS WHERE NAME =? AND PASS =?");
-			this.stmt.setString(1, login.getName());
+					("SELECT * FROM ACCOUNTS WHERE USER_ID =? AND PASS =?");
+			this.stmt.setString(1, login.getUserId());
 			this.stmt.setString(2,login.getPass());
 			this.rs = this.stmt.executeQuery();    //SELECT文の実行、結果表を取得
 			

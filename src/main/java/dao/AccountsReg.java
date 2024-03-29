@@ -106,14 +106,15 @@ public class AccountsReg {
 	
 	//アカウントチェック
 	
-	public Account findByReg(List<Account> list) {
-		Account account =null;
+	public Account findByReg(Account account ) {
+		Account a = null;
 		try {
+			
 			this.connect();
 			this.stmt = con.prepareStatement
-					("SELECT * FROM ACCOUNTS WHERE NAME =? AND PASS =?");
-			this.stmt.setString(1, account.getName());
-			this.stmt.setString(2,account.getPass());
+					("SELECT * FROM ACCOUNTS WHERE USER_ID =? AND PASS =?");
+			this.stmt.setString(1, account.getUserId());
+			this.stmt.setString(2, account.getPass());
 			this.rs = this.stmt.executeQuery();    //SELECT文の実行、結果表を取得
 			
 			if(rs.next()) {
@@ -121,20 +122,24 @@ public class AccountsReg {
 				String pass = rs.getString("PASS");
 				String mail = rs.getString("MAIL");
 				String name = rs.getString("NAME");
-				account = new Account(userId,pass,mail,name);
+				a = new Account(userId,pass,mail,name);
+				//System.out.println(a.getUserId()+"/"+a.getPass());
 				
 			}
 		
+			
 		
 		}catch(NamingException | SQLException e) {
+			
 			e.printStackTrace();
+			return null;
 			
 		}finally {
 			this.disconnect();
 		}
 		
 		
-		return account;
+		return a;
 		
 	}
 }

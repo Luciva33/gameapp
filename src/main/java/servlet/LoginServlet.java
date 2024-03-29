@@ -25,10 +25,10 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		
+		String userId = request.getParameter("userId");
 		String pass = request.getParameter("pass");
-		String name = request.getParameter("name");
 		
-		Login login = new Login(name,pass);
+		Login login = new Login(userId,pass);
 		LoginLogic bo = new LoginLogic();
 		boolean result = bo.execute(login);
 		

@@ -23,9 +23,9 @@ public class AccountRegLogin extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		Account account = (Account) session.getAttribute("account");
-		Login   login = new Login(account.getName(),account.getPass()); 
-		session.removeAttribute("account");
-		System.out.println(login.getName() +"/"+login.getPass() );
+		Login   login = new Login(account.getUserId(),account.getPass()); 
+		
+		System.out.println(login.getUserId() +"/"+login.getPass() );
 		session.setAttribute("Login", login);
 		
 		

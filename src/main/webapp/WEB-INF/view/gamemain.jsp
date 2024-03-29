@@ -13,7 +13,15 @@
 </head>
 <body>
 	<h1>GAME＿MAIN</h1>
-	<p><c:out value="${Login.name}" />さん、ログイン中</p>
+	
+	<p><c:out value="${Login.userId}" />さん、ログイン中</p>
+	
+	
+	<p><a href="TetorisuServlet">テトリス</a></p>
+	
+	
+	
+	
 	<p><a href="Logout">ログアウト</a></p>
 </body>
 </html>

@@ -1,7 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -35,25 +34,35 @@ public class AccountRegServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		String name = request.getParameter("name");
+		String userId = request.getParameter("userId");
 		String pass = request.getParameter("pass");
 
-		System.out.println(name + "/" + pass);
-		if (name != null && name.length() != 0 &&
+		System.out.println(userId + "/" + pass);
+		if (userId != null && userId.length() != 0 &&
 				pass != null && pass.length() != 0) {
 
-			Account account = new Account(pass, name);
+			Account account = new Account(userId,pass);
+			AccountsReg reg = new AccountsReg();	
+			
+			Account result = reg.findByReg(account);
+			
+			if(result != null) {
+				
+				request.setAttribute("errorMsg", "ユーザーIDが重複してます！");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/view/AccountReg.jsp");
+				dispatcher.forward(request, response);
 
-			AccountsReg reg = new AccountsReg();
-			List<Account> list = reg.findAll();
-			//reg. findByReg(list);
+			}else {
+				
+
 			reg.InsertOne(account);
-			request.setAttribute("Msg", name +"を登録しました!");
+			request.setAttribute("Msg", userId +"を登録しました!");
 			HttpSession session = request.getSession();
 			session.setAttribute("account", account);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/view/AccountReg.jsp");
 			dispatcher.forward(request, response);
-
+		
+			}
 		} else {
 			//エラーメッセージ
 			request.setAttribute("errorMsg", "登録できませんでした！");

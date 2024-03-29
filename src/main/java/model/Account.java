@@ -17,10 +17,10 @@ public class Account implements Serializable {
 	}
 	
 
-	public Account(String pass, String name) {
+	public Account(String userId, String pass) {
 		super();
+		this.userId =  userId;
 		this.pass = pass;
-		this.name = name;
 	}
 
 
