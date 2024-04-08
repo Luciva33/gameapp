@@ -4,7 +4,7 @@
 }
 html, body, .app {
   width: 100%;			/* 横幅 100% */
-  height: 100%;			/* 高さ 100% */
+  height:100%;			/* 高さ 100% */
   margin: 0;			/* 外幅 0 */
   padding: 0;			/* 内幅 0 */
   overflow: hidden;		/* はみ出した時は隠す */
@@ -15,8 +15,8 @@ body {
 }
 #app canvas {
   /* ドット絵表示 */
-  image-rendering: -webkit-optimize-contrast;	/* Safari用 */
-  image-rendering: -moz-crisp-edges;			/* Firefox用 */
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: -moz-crisp-edges;			
   image-rendering: pixelated;
   position: absolute;	/* 位置固定 */
 }
