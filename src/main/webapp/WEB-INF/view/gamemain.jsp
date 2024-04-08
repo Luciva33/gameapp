@@ -19,6 +19,8 @@
 	
 	<p><a href="TetorisuServlet">テトリス</a></p>
 	
+	<p><a href="RPGServlet">サンプルクエスト</a></p>
+	<p>音量注意！</p>
 	
 	
 	
